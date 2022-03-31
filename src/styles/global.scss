@@ -1,0 +1,18 @@
+@import '@/styles/scrollbar.scss';
+@import '@/styles/element-ui.scss';
+@import '@/styles/transition.scss';
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+	scrollbar-width: thin;
+	scrollbar-color: e6e6e6 transparent;
+  overflow-x: hidden;
+  @include scrollbar(6px, #646464);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

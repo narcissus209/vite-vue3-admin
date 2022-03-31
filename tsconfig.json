@@ -1,0 +1,36 @@
+{
+  "include": [
+		"src/typings/*.d.ts",
+		"src/typings/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.vue",
+		"mock/**/*.ts",
+    "vite.config.ts",
+    "viteConfig/**/*.ts"
+  ],
+  "compilerOptions": {
+    "baseUrl": "./",
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "composite": true,
+    "lib": ["esnext", "dom"],
+    "preserveValueImports": true,
+    "importsNotUsedAsValues": "error",
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+  },
+	"exclude": [
+		"/dist/**",
+		"node_modules"
+	]
+}
