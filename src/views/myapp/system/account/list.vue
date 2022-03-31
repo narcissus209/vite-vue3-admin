@@ -45,6 +45,7 @@ const defaultListQuery = {
 const { state, getList, init, delItem } = listModel(defaultListQuery, getAccountListApi, delAccountApi)
 const { loading, list, page, listQuery } = toRefs(state)
 const router = useRouter()
+// 调整到新增、编辑、详情
 const goToAddEdit = (id = '', type = 'add') => {
   const r = {
     path: '/myapp/system/account/add-edit',
