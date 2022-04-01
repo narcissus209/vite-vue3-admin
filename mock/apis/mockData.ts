@@ -1,23 +1,27 @@
 import { mock, Random } from 'mockjs'
 
 // 角色
-const role = mock({
-  'list|10-20': [
-    {
-      id: '@id',
-      name: '@cname',
-      createTime: '@datetime', //创建时间
-      'state|1-2': 1
-    }
-  ]
-})
 const Admin = {
   id: '1',
   name: '超级管理员',
   createTime: '2022-02-22 22:22:22',
   state: 1
 }
-export const roleList = role.list.concat(Admin)
+export const roleList = [
+  Admin,
+  {
+    id: '2',
+    name: '运维人员',
+    createTime: '2022-02-22 22:22:22',
+    state: 1
+  },
+  {
+    id: '3',
+    name: '主管',
+    createTime: '2022-02-22 22:22:22',
+    state: 1
+  }
+]
 
 // 账号
 const account = mock({

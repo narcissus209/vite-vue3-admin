@@ -3,11 +3,16 @@
     <div class="layout-form-content">
       <slot></slot>
     </div>
-    <div v-if="$slots.footer" class="layout-form-footer">
+    <div v-if="$slots.footer" class="layout-form-footer" :style="{ paddingLeft: props.paddingLeft }">
       <slot name="footer"></slot>
     </div>
   </div>
 </template>
+<script setup lang="ts">
+const props = withDefaults(defineProps<{ paddingLeft?: string }>(), {
+  paddingLeft: '120px'
+})
+</script>
 <style lang="scss" scoped>
 .layout-form {
   position: relative;

@@ -68,6 +68,16 @@
   }
 }
 
+// 表单样式
+.com-form {
+  .el-form-item__content {
+    max-width: 700px;
+    .el-select {
+      width: 100%;
+    }
+  }
+}
+
 .list-operation {
   margin-bottom: 12px;
 }

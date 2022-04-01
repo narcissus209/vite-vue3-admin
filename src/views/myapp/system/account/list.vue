@@ -30,7 +30,7 @@
         </template>
       </el-table-column>
     </ComTable>
-    <ListPage v-model:page="page" @change-page="getList()"></ListPage>
+    <ComPage v-model:page="page" @change-page="getList()"></ComPage>
   </LayoutList>
 </template>
 <script setup lang="ts">

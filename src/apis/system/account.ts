@@ -13,7 +13,7 @@ export const getAccountDateilApi = (id: any) => {
   })
 }
 
-export const addAccounApi = (data: any) => {
+export const addAccountApi = (data: any) => {
   return http(`/mock/account`, {
     method: 'post',
     data

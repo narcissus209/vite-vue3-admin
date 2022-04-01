@@ -37,7 +37,9 @@ const update = (data: any) => {
 const detail = (id: any) => {
   for (let i = 0; i < accountList.length; i++) {
     if (accountList[i].id === id) {
-      return accountList[i]
+      const detailInfo = JSON.parse(JSON.stringify(accountList[i]))
+      detailInfo.roleId = detailInfo.role.id
+      return detailInfo
     }
   }
   return ''
