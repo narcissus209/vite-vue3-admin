@@ -5,7 +5,7 @@ import { plugins } from './viteConfig'
 const resolve = (src: string) => path.resolve(__dirname, src)
 
 export default defineConfig(configEnv => {
-  const viteEnv = loadEnv(configEnv.mode, `.env.${configEnv.mode}`)
+  const viteEnv = loadEnv(configEnv.mode, process.cwd())
   console.log(viteEnv)
   return {
     base: viteEnv.VITE_BASE_URL,

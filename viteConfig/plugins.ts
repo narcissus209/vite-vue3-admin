@@ -11,7 +11,7 @@ export function plugins(viteEnv: any) {
       symbolId: 'icon-[dir]-[name]'
     })
   ]
-  if (viteEnv.VITE_MOCK) {
+  if (viteEnv.VITE_MOCK === 'true') {
     plugins.push(
       viteMockServe({
         mockPath: 'mock',
