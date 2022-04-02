@@ -40,14 +40,20 @@
   </LayoutForm>
 </template>
 <script setup lang="ts">
-import formModel from '@/model/formModel'
-import { toRefs, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { ref, onMounted } from 'vue'
 import { getAccountDateilApi, addAccountApi, editAccountApi } from '@/apis/system/account'
 import { getRoleListApi } from '@/apis/system/role'
 import { validatePhone, validateEmail, validatePassword } from '@/utils/validate'
+import { cloneDeep } from '@/utils'
+import type { IAccount, IRole } from '@/typings/api'
 
-// 定义查询参数
-const defaultFormData = {
+const route = useRoute()
+const pageType = ref(String(route.query.type) || '')
+const id = ref(String(route.query.id) || '')
+
+// 表单信息
+const formData = ref<IAccount>({
   name: '',
   roleId: '',
   phone: '',
@@ -55,15 +61,19 @@ const defaultFormData = {
   password: '',
   rePassword: '',
   avatar: ''
-}
-const { state, init } = formModel(defaultFormData, getAccountDateilApi, addAccountApi, editAccountApi)
-const { formData } = toRefs(state)
-init()
-
+})
 // 获取角色信息
-const roleList = ref<any>([])
-getRoleListApi({ all: 1 }).then((res: any) => {
-  roleList.value = res.data.list
+const roleList = ref<IRole[]>([])
+onMounted(async () => {
+  if (id.value && (pageType.value === 'edit' || pageType.value === 'detail')) {
+    const { data } = await getAccountDateilApi(id.value)
+    if (data.id) {
+      formData.value = cloneDeep(data)
+      formData.value.password = ''
+    }
+  }
+  const { data } = await getRoleListApi({ all: 1 })
+  roleList.value = data.list
 })
 
 // 规则配置
@@ -99,10 +109,14 @@ const rules = {
 const saveData = async () => {
   try {
     await formRef.value.validate()
-    console.log(formData)
+    if (pageType.value === 'edit' && id.value) {
+      await editAccountApi(formData.value)
+    } else {
+      await addAccountApi(formData.value)
+    }
+    console.log('success')
   } catch (error) {
     console.log(error)
   }
 }
 </script>
-<style></style>

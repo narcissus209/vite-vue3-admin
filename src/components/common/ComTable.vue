@@ -1,8 +1,5 @@
 <template>
-  <el-table id="tableRef" stripe border v-bind="props">
+  <el-table id="tableRef" stripe border v-bind="$attrs">
     <slot></slot>
   </el-table>
 </template>
-<script setup lang="ts">
-const props = defineProps({})
-</script>
