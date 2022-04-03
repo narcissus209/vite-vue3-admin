@@ -1,6 +1,7 @@
 import { accountList } from './mockData'
 import type { MockMethod } from 'vite-plugin-mock'
 import { mock } from 'mockjs'
+import { detail as roleDetail } from './role'
 
 const getList = (query: any) => {
   query.page = Number(query.page) || 1
@@ -18,8 +19,10 @@ const getList = (query: any) => {
   }
 }
 const add = (data: any) => {
-  accountList.push({
+  accountList.unshift({
     ...data,
+    role: roleDetail(data.roleId),
+    createTime: mock('@datetime'),
     id: mock('@id')
   })
 }

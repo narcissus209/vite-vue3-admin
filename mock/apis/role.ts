@@ -34,7 +34,7 @@ const update = (data: any) => {
     }
   }
 }
-const detail = (id: any) => {
+export const detail = (id: any) => {
   for (let i = 0; i < roleList.length; i++) {
     if (roleList[i].id === id) {
       return roleList[i]

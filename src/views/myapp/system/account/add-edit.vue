@@ -29,7 +29,7 @@
         />
       </el-form-item>
       <el-form-item label="头像" prop="avatar">
-        <el-input v-model="formData.avatar" />
+        <ComUploadImgOne v-model="formData.avatar"></ComUploadImgOne>
         <div class="tips">请上传你的头像，宽高1:1，大小不超过200kb</div>
       </el-form-item>
     </el-form>
@@ -42,11 +42,13 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { ref, onMounted } from 'vue'
+import { ElMessage } from 'element-plus'
 import { getAccountDateilApi, addAccountApi, editAccountApi } from '@/apis/system/account'
 import { getRoleListApi } from '@/apis/system/role'
 import { validatePhone, validateEmail, validatePassword } from '@/utils/validate'
 import { cloneDeep } from '@/utils'
 import type { IAccount, IRole } from '@/typings/api'
+import router from '@/router'
 
 const route = useRoute()
 const pageType = ref(String(route.query.type) || '')
@@ -76,7 +78,7 @@ onMounted(async () => {
   roleList.value = data.list
 })
 
-// 规则配置
+// 表单规则配置
 const formRef = ref<any>()
 const validateRePassword = (rule: any, value: any, callback: any) => {
   if (value !== formData.value.password) {
@@ -106,15 +108,18 @@ const rules = {
   avatar: [{ required: true, message: '请上传你的头像', trigger: ['change', 'blur'] }]
 }
 
+// 保存数据
 const saveData = async () => {
   try {
     await formRef.value.validate()
     if (pageType.value === 'edit' && id.value) {
       await editAccountApi(formData.value)
+      ElMessage.success('编辑成功')
     } else {
       await addAccountApi(formData.value)
+      ElMessage.success('新增成功')
     }
-    console.log('success')
+    router.back()
   } catch (error) {
     console.log(error)
   }

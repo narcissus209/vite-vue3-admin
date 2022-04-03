@@ -27,9 +27,7 @@ const closeFn = (i: number) => {
   display: flex;
   align-items: center;
   .tag {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex();
     font-size: 12px;
     border: 1px solid #d9d9d9;
     background: #fff;

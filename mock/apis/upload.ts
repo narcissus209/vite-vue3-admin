@@ -3,10 +3,9 @@ import { Random } from 'mockjs'
 
 const apis: MockMethod[] = [
   {
-    url: '/mock/account/:id', // 修改
-    method: 'delete',
-    response: (req: any): any => {
-      console.log(req)
+    url: '/mock/upload',
+    method: 'post',
+    response: (): any => {
       return {
         code: 200,
         data: {

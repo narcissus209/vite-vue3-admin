@@ -14,6 +14,14 @@ export default defineConfig(configEnv => {
         '@': resolve('src')
       }
     },
+    css: {
+      //css预处理
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@import "@/styles/common.scss";'
+        }
+      }
+    },
     plugins: plugins(viteEnv),
     server: {
       host: '0.0.0.0',

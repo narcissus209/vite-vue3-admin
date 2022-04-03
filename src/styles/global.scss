@@ -1,6 +1,7 @@
-@import '@/styles/scrollbar.scss';
-@import '@/styles/element-ui.scss';
-@import '@/styles/transition.scss';
+@import './scrollbar.scss';
+@import './element-ui.scss';
+@import './transition.scss';
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -20,4 +21,5 @@ html {
 .tips {
   color: #999;
   font-size: 12px;
+  width: 100%;
 }

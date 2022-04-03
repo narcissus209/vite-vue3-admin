@@ -1,0 +1,6 @@
+// vite 配置全局可用
+@mixin flex($align-items:center, $justify-content: center) {
+  display: flex;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
