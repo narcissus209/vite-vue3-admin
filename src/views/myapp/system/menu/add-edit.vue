@@ -44,9 +44,9 @@ import { cloneDeep } from '@/utils'
 
 const router = useRouter()
 const route = useRoute()
-const pageType = ref(String(route.query.type) || '')
-const id = ref(String(route.query.id) || '')
-const pid = ref(String(route.query.pid) || '')
+const pageType = ref<string>(route.query.type as string)
+const id = ref<string>(route.query.id as string)
+const pid = ref<string>(route.query.pid as string)
 
 // 菜单信息
 const menuTree = ref<Router.Route[]>([])

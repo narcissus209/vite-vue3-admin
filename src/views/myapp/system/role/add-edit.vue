@@ -27,8 +27,8 @@ import type { IRole } from '@/typings/api'
 
 const router = useRouter()
 const route = useRoute()
-const pageType = ref(String(route.query.type) || '')
-const id = ref(String(route.query.id) || '')
+const pageType = ref<string>(route.query.type as string)
+const id = ref<string>(route.query.id as string)
 
 // 表单信息
 const formData = ref<IRole>({

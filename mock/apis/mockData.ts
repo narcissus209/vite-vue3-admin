@@ -166,7 +166,7 @@ export const menuList: Router.Route[] = [
     title: '员工管理',
     type: 'menuView',
     icon: 'system',
-    sort: 2
+    sort: 5
   },
   {
     id: '10002',
