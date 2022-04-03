@@ -111,7 +111,7 @@ export const arr2tree = (source: any, id = 'id', pid = 'parentId'): any => {
     map[item[id]] = item
   })
   data.forEach((item: any) => {
-    if (item[pid] === null || item[pid] === undefined || item[pid] === 0 || item[pid] === '0') {
+    if (!item[pid] || item[pid] === '0') {
       treeData.push(item)
     } else {
       const parent = map[item[pid]]
@@ -130,7 +130,7 @@ export const arr2tree = (source: any, id = 'id', pid = 'parentId'): any => {
  * @param type 排序方式  true从小到大，false从大到小
  * @returns boolean
  */
-export const compare = (property: any, type: boolean) => {
+export const compare = (property?: any, type = true) => {
   return function (a: any, b: any) {
     if (property) {
       return type ? a[property] - b[property] : b[property] - a[property]

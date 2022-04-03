@@ -14,12 +14,15 @@
       </el-form-item>
       <el-form-item label="tab栏" prop="hideTab">
         <el-radio-group v-model="formData.hideTab">
-          <el-radio :label="true">显示</el-radio>
-          <el-radio :label="false">隐藏</el-radio>
+          <el-radio :label="false">显示</el-radio>
+          <el-radio :label="true">隐藏</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="图标" prop="icon">
         <el-input v-model="formData.icon" placeholder="请输入图标" clearable maxlength="40" show-word-limit />
+      </el-form-item>
+      <el-form-item label="权重" prop="sort">
+        <el-input v-model="formData.sort" placeholder="请输入权重" clearable maxlength="40" show-word-limit />
       </el-form-item>
       <el-form-item label="父菜单" prop="pids">
         <el-cascader v-model="formData.pids" :options="menuTree" :props="cascaderProps" clearable />
@@ -36,13 +39,14 @@ import { useRoute, useRouter } from 'vue-router'
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { getMenuDateilApi, addMenuApi, editMenuApi, getMenuParentApi } from '@/apis/system/menu'
-import { typeMap } from './menuData'
+import { typeMap, getPids } from './menuData'
 import { cloneDeep } from '@/utils'
 
 const router = useRouter()
 const route = useRoute()
 const pageType = ref(String(route.query.type) || '')
 const id = ref(String(route.query.id) || '')
+const pid = ref(String(route.query.pid) || '')
 
 // 菜单信息
 const menuTree = ref<Router.Route[]>([])
@@ -59,6 +63,7 @@ const formData = ref<Router.Route>({
   name: '',
   type: 'view',
   icon: '',
+  sort: 1,
   hideTab: false,
   pids: []
 })
@@ -75,6 +80,9 @@ onMounted(async () => {
   }
   const menuData = await getMenuParentApi()
   menuTree.value = menuData.data
+  if (pid.value) {
+    formData.value.pids = getPids(pid.value, menuData.data)
+  }
 })
 
 // 表单规则配置
@@ -83,6 +91,7 @@ const rules = {
   title: [{ required: true, message: '请输入标题', trigger: 'blur' }],
   name: [{ required: true, message: '请输入名称', trigger: 'blur' }],
   type: [{ required: true, message: '请选择类型', trigger: 'change' }],
+  sort: [{ required: true, message: '请输入权重', trigger: 'blur' }],
   hideTab: [{ required: true, message: '请选择tab栏状态', trigger: 'change' }]
 }
 

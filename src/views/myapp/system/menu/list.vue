@@ -12,11 +12,12 @@
         </template>
       </el-table-column>
       <el-table-column prop="icon" label="图标" />
-      <el-table-column label="操作" width="170">
+      <el-table-column prop="sort" label="权重" />
+      <el-table-column label="操作" width="200">
         <template v-slot="{ row }">
-          <el-button type="text" @click="goToAddEdit(row.id, 'detail')">详情</el-button>
           <el-button type="text" @click="goToAddEdit(row.id, 'edit')">编辑</el-button>
           <el-button class="delete" type="text" @click="delItem(row.id)">删除</el-button>
+          <el-button v-if="row.type !== 'view'" type="text" @click="goToAddEdit('', 'add', row.id)">新增子菜单</el-button>
         </template>
       </el-table-column>
     </ComTable>
@@ -33,13 +34,14 @@ const { state, init, delItem } = listModel({}, getMenuListApi, delMenuApi)
 const { loading, list } = toRefs(state)
 const router = useRouter()
 // 调整到新增、编辑、详情
-const goToAddEdit = (id = '', type = 'add') => {
+const goToAddEdit = (id = '', type = 'add', pid?: string) => {
   const r = {
     path: '/myapp/system/menu/add-edit',
     query: {
       bcName: '新增菜单',
       type,
-      id
+      id,
+      pid
     }
   }
   if (type === 'edit') {

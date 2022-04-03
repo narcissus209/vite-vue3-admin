@@ -23,7 +23,7 @@ const arr2tree = (source: any, id = 'id', pid = 'parentId'): any => {
     map[item[id]] = item
   })
   data.forEach((item: any) => {
-    if (item[pid] === null || item[pid] === undefined || item[pid] === 0 || item[pid] === '0') {
+    if (!item[pid] || item[pid] === '0') {
       treeData.push(item)
     } else {
       const parent = map[item[pid]]
@@ -35,8 +35,18 @@ const arr2tree = (source: any, id = 'id', pid = 'parentId'): any => {
   })
   return treeData
 }
+export const compare = (property?: any, type = true) => {
+  return function (a: any, b: any) {
+    if (property) {
+      return type ? a[property] - b[property] : b[property] - a[property]
+    } else {
+      return type ? a - b : b - a
+    }
+  }
+}
 
 const getList = () => {
+  menuList.sort(compare('sort'))
   const tree = arr2tree(menuList, 'id', 'pid')
   return {
     list: tree,
@@ -52,18 +62,40 @@ const add = (data: any) => {
 const update = (data: any) => {
   for (let i = 0; i < menuList.length; i++) {
     if (menuList[i].id === data.id) {
+      let pid = ''
+      if (data.pids && data.pids.length) {
+        pid = data.pids[data.pids.length - 1]
+      }
       menuList[i] = {
         ...menuList[i],
-        ...data
+        ...data,
+        pid: pid
       }
       return
     }
   }
 }
+const getPids = (pid: string) => {
+  if (!pid) return []
+  const pids = [pid]
+  let newPid = pid
+  for (let i = 0; i < menuList.length; i++) {
+    if (menuList[i].id === newPid) {
+      if (!menuList[i].pid) {
+        return pids
+      }
+      pids.unshift(menuList[i].pid as string)
+      newPid = menuList[i].pid as string
+      i = -1
+    }
+  }
+  return pids
+}
 const detail = (id: any) => {
   for (let i = 0; i < menuList.length; i++) {
     if (menuList[i].id === id) {
       const detailInfo = JSON.parse(JSON.stringify(menuList[i]))
+      detailInfo.pids = getPids(detailInfo.pid)
       return detailInfo
     }
   }

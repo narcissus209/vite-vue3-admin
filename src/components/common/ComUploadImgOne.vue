@@ -76,7 +76,6 @@ const beforeUploadHandle: UploadProps['beforeUpload'] = async file => {
 // 上传成功
 const successHandle: UploadProps['onSuccess'] = res => {
   loading.value = false
-  console.log(res)
   ElMessage.success('上传成功')
   emit('update:modelValue', res.data.url)
   if (props.onSuccess) {

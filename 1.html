@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const menuList = [
+        {
+          id: '1',
+          children: [
+            {
+              id: '1-1',
+              pid: '1',
+              children: [
+                {
+                  id: '1-1-1',
+                  pid: '1-1',
+                  children: [
+                    {
+                      id: '1-1-1-1',
+                      pid: '1-1-1',
+                    },
+                    {
+                      id: '1-1-1-2',
+                      pid: '1-1-1',
+                    }
+                  ]
+                },
+                {
+                  id: '1-1-2',
+                  pid: '1-1',
+                }
+              ]
+            },
+            {
+              id: '1-2',
+              pid: '1',
+              children: [
+                {
+                  id: '1-2-1',
+                  pid: '1-2',
+                },
+                {
+                  id: '1-2-2',
+                  pid: '1-2',
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      
+      const ss = (id, item) => {
+        if (id === item.id) {
+          return id
+        } else {
+
+        }
+      }
+      const xx = (id, menu) => {
+        let res = []
+        for (let i = 0; i < menu.length; i++) {
+          if (id === menu[i].id) {
+            res.push(menu[i].id)
+            return res
+          } else {
+            if (menu[i].children && menu[i].children.length) {
+              let res2 = xx(id, menu[i].children)
+              if (res2.length) {
+                res.push(menu[i].id, ...xx(id, menu[i].children))
+              }
+            }
+          }
+        }
+        return res
+      }
+      console.log(xx('1-1-1-2', menuList))
+    </script>
+  </body>
+</html>
