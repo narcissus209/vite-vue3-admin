@@ -105,7 +105,7 @@ const rules = {
     { required: true, message: '请再次输入你的密码', trigger: 'blur' },
     { validator: validateRePassword, trigger: 'blur' }
   ],
-  avatar: [{ required: true, message: '请上传你的头像', trigger: ['change', 'blur'] }]
+  avatar: [{ required: true, message: '请上传你的头像', trigger: 'change' }]
 }
 
 // 保存数据

@@ -35,7 +35,7 @@ const { headerStyle } = useLayoutStore()
   }
   .operations {
     flex-grow: 1;
-    @include flex(center, end);
+    @include flex(center, flex-end);
     padding-right: 12px;
   }
 }
