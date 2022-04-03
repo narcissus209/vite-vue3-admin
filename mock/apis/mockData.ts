@@ -78,96 +78,98 @@ export const menuList: Router.Route[] = [
     name: 'myapp_system',
     title: '系统设置',
     type: 'menu',
-    icon: 'system',
-    children: [
-      {
-        id: '10004',
-        name: 'myapp_system_account',
-        title: '账号管理',
-        type: 'menuView',
-        icon: 'system',
-        children: [
-          {
-            id: '10005',
-            name: 'myapp_system_account_list',
-            title: '账号管理',
-            type: 'view'
-          },
-          {
-            id: '10006',
-            name: 'myapp_system_account_add-edit',
-            title: '新增编辑账号',
-            type: 'view',
-            hideTab: true
-          }
-        ]
-      },
-      {
-        id: '10007',
-        name: 'myapp_system_menu',
-        title: '菜单管理',
-        type: 'menuView',
-        icon: 'system',
-        children: [
-          {
-            id: '10008',
-            name: 'myapp_system_menu_list',
-            title: '菜单管理',
-            type: 'view'
-          },
-          {
-            id: '10009',
-            name: 'myapp_system_menu_add-edit',
-            title: '新增编辑菜单',
-            type: 'view',
-            hideTab: true
-          }
-        ]
-      },
-      {
-        id: '10010',
-        name: 'myapp_system_role',
-        title: '角色管理',
-        type: 'menuView',
-        icon: 'system',
-        children: [
-          {
-            id: '10011',
-            name: 'myapp_system_role_list',
-            title: '角色管理',
-            type: 'view'
-          },
-          {
-            id: '10012',
-            name: 'myapp_system_role_add-edit',
-            title: '新增编辑角色',
-            type: 'view',
-            hideTab: true
-          }
-        ]
-      },
-      {
-        id: '10001',
-        name: 'myapp_system_staff',
-        title: '员工管理',
-        type: 'menuView',
-        icon: 'system',
-        children: [
-          {
-            id: '10002',
-            name: 'myapp_system_staff_list',
-            title: '员工管理',
-            type: 'view'
-          },
-          {
-            id: '10003',
-            name: 'myapp_system_staff_add-edit',
-            title: '新增编辑员工',
-            type: 'view',
-            hideTab: true
-          }
-        ]
-      }
-    ]
+    icon: 'system'
+  },
+  {
+    id: '10004',
+    pid: '10000',
+    name: 'myapp_system_account',
+    title: '账号管理',
+    type: 'menuView',
+    icon: 'system'
+  },
+  {
+    id: '10005',
+    pid: '10004',
+    name: 'myapp_system_account_list',
+    title: '账号管理',
+    type: 'view'
+  },
+  {
+    id: '10006',
+    pid: '10004',
+    name: 'myapp_system_account_add-edit',
+    title: '新增编辑账号',
+    type: 'view',
+    hideTab: true
+  },
+  {
+    id: '10007',
+    pid: '10000',
+    name: 'myapp_system_menu',
+    title: '菜单管理',
+    type: 'menuView',
+    icon: 'system'
+  },
+  {
+    id: '10008',
+    pid: '10007',
+    name: 'myapp_system_menu_list',
+    title: '菜单管理',
+    type: 'view'
+  },
+  {
+    id: '10009',
+    pid: '10007',
+    name: 'myapp_system_menu_add-edit',
+    title: '新增编辑菜单',
+    type: 'view',
+    hideTab: true
+  },
+  {
+    id: '10010',
+    pid: '10000',
+    name: 'myapp_system_role',
+    title: '角色管理',
+    type: 'menuView',
+    icon: 'system'
+  },
+  {
+    id: '10011',
+    pid: '10010',
+    name: 'myapp_system_role_list',
+    title: '角色管理',
+    type: 'view'
+  },
+  {
+    id: '10012',
+    pid: '10010',
+    name: 'myapp_system_role_add-edit',
+    title: '新增编辑角色',
+    type: 'view',
+    hideTab: true
+  },
+  {
+    id: '10001',
+    pid: '10000',
+    name: 'myapp_system_staff',
+    title: '员工管理',
+    type: 'menuView',
+    icon: 'system'
+  },
+  {
+    id: '10002',
+    pid: '10001',
+    name: 'myapp_system_staff_list',
+    title: '员工管理',
+    type: 'view'
+  },
+  {
+    id: '10003',
+    pid: '10001',
+    name: 'myapp_system_staff_add-edit',
+    title: '新增编辑员工',
+    type: 'view',
+    hideTab: true
   }
 ]

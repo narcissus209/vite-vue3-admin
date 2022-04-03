@@ -102,7 +102,7 @@ const apis: MockMethod[] = [
     }
   },
   {
-    url: '/mock/account/:id', // 修改
+    url: '/mock/account/:id', // 删除
     method: 'delete',
     response: (req: any): any => {
       del(req.query.id)

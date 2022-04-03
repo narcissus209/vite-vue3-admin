@@ -1,31 +1,53 @@
 <template>
-  <div class="list-search">
-    <el-input v-model="listQuery.name">
-      <template #prepend>请输入用户名</template>
-    </el-input>
-    <div class="btn-group">
-      <el-button @click="getList(true)">搜索</el-button>
-      <el-button @click="init()">重置</el-button>
-    </div>
-  </div>
-  <ComTable :data="list" v-loading="loading">
-    <el-table-column prop="id" label="ID" />
-    <el-table-column prop="title" label="标题" />
-    <el-table-column prop="name" label="名称" />
-    <el-table-column prop="icon" label="图标" />
-  </ComTable>
-  <ComPage v-model="page" @change-page="getList()"></ComPage>
+  <LayoutList>
+    <template v-slot:operation>
+      <el-button type="primary" @click="goToAddEdit()">新增菜单</el-button>
+    </template>
+    <ComTable :data="list" v-loading="loading" row-key="id">
+      <el-table-column prop="title" label="标题" />
+      <el-table-column prop="name" label="名称" />
+      <el-table-column prop="type" label="类型">
+        <template v-slot="{ row }">
+          <el-tag :type="typeMap[row.type].type">{{ typeMap[row.type].span }}</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column prop="icon" label="图标" />
+      <el-table-column label="操作" width="170">
+        <template v-slot="{ row }">
+          <el-button type="text" @click="goToAddEdit(row.id, 'detail')">详情</el-button>
+          <el-button type="text" @click="goToAddEdit(row.id, 'edit')">编辑</el-button>
+          <el-button class="delete" type="text" @click="delItem(row.id)">删除</el-button>
+        </template>
+      </el-table-column>
+    </ComTable>
+  </LayoutList>
 </template>
 <script setup lang="ts">
-import { getMenuListApi } from '@/apis/system/menu'
+import { getMenuListApi, delMenuApi } from '@/apis/system/menu'
 import listModel from '@/model/listModel'
 import { toRefs } from 'vue'
-// 定义查询参数
-const defaultListQuery = {
-  name: ''
+import { useRouter } from 'vue-router'
+import { typeMap } from './menuData'
+
+const { state, init, delItem } = listModel({}, getMenuListApi, delMenuApi)
+const { loading, list } = toRefs(state)
+const router = useRouter()
+// 调整到新增、编辑、详情
+const goToAddEdit = (id = '', type = 'add') => {
+  const r = {
+    path: '/myapp/system/menu/add-edit',
+    query: {
+      bcName: '新增菜单',
+      type,
+      id
+    }
+  }
+  if (type === 'edit') {
+    r.query.bcName = '编辑菜单'
+  } else if (type === 'detail') {
+    r.query.bcName = '菜单详情'
+  }
+  router.push(r)
 }
-const { state, getList, init } = listModel(defaultListQuery, getMenuListApi)
-const { loading, list, page, listQuery } = toRefs(state)
-console.log(page.value)
 init()
 </script>
