@@ -8,7 +8,6 @@ const Admin = {
   state: 1
 }
 export const roleList = [
-  Admin,
   {
     id: '2',
     name: '运维人员',
@@ -20,7 +19,8 @@ export const roleList = [
     name: '主管',
     createTime: '2022-02-22 22:22:22',
     state: 1
-  }
+  },
+  Admin
 ]
 
 // 账号

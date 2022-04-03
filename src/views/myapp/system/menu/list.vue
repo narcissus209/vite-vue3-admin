@@ -14,7 +14,7 @@
     <el-table-column prop="name" label="名称" />
     <el-table-column prop="icon" label="图标" />
   </ComTable>
-  <ComPage v-model:page="page" @change-page="getList()"></ComPage>
+  <ComPage v-model="page" @change-page="getList()"></ComPage>
 </template>
 <script setup lang="ts">
 import { getMenuListApi } from '@/apis/system/menu'

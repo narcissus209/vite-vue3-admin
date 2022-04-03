@@ -18,7 +18,7 @@ const getList = (query: any) => {
   }
 }
 const add = (data: any) => {
-  roleList.push({
+  roleList.unshift({
     ...data,
     id: mock('@id')
   })

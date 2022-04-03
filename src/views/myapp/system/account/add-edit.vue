@@ -40,7 +40,7 @@
   </LayoutForm>
 </template>
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { getAccountDateilApi, addAccountApi, editAccountApi } from '@/apis/system/account'
@@ -48,8 +48,8 @@ import { getRoleListApi } from '@/apis/system/role'
 import { validatePhone, validateEmail, validatePassword } from '@/utils/validate'
 import { cloneDeep } from '@/utils'
 import type { IAccount, IRole } from '@/typings/api'
-import router from '@/router'
 
+const router = useRouter()
 const route = useRoute()
 const pageType = ref(String(route.query.type) || '')
 const id = ref(String(route.query.id) || '')

@@ -1,10 +1,10 @@
 <template>
   <div class="list-page">
     <el-pagination
-      :currentPage="page.page"
-      :page-size="page.size"
+      :currentPage="modelValue.page"
+      :page-size="modelValue.size"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="page.total"
+      :total="modelValue.total"
       @size-change="changeSize"
       @current-change="changePage"
     >
@@ -13,29 +13,28 @@
 </template>
 <script setup lang="ts">
 interface IProps {
-  page: IPage
+  modelValue: IPage
 }
 const props = defineProps<IProps>()
 
 interface Emits {
   (e: 'change-page'): void
-  (e: 'update:page', val: IPage): void
+  (e: 'update:modelValue', val: IPage): IPage
 }
 const emit = defineEmits<Emits>()
 
 const changeSize = (size: number) => {
-  emit('update:page', { ...props.page, size: size, page: 1 })
+  emit('update:modelValue', { ...props.modelValue, size: size, page: 1 })
   emit('change-page')
 }
 const changePage = (page: number) => {
-  emit('update:page', { ...props.page, page })
+  emit('update:modelValue', { ...props.modelValue, page })
   emit('change-page')
 }
 </script>
 <style lang="scss" scoped>
 .list-page {
-  display: flex;
-  justify-content: end;
+  @include flex(center, flex-end);
   margin-top: 12px;
 }
 </style>
