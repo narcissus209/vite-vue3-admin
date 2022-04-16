@@ -1,10 +1,10 @@
 <template>
   <div v-for="menu in menuList" :key="menu.path">
-    <el-sub-menu v-if="menu.meta.type === 'menu'" :index="menu.path">
+    <el-sub-menu v-if="menu.meta.type === 'menu' && menu.children?.length" :index="menu.path">
       <template #title>
         <MenuTitle :title="menu.meta.title" :icon="menu.meta.icon"></MenuTitle>
       </template>
-      <MenuBar :menu-list="menu.children"></MenuBar>
+      <MenuBar :menuList="menu.children"></MenuBar>
     </el-sub-menu>
     <el-menu-item v-else-if="menu.meta.type === 'menuView'" :index="menu.path" @click="go(menu)">
       <MenuTitle :title="menu.meta.title" :icon="menu.meta.icon"></MenuTitle>
@@ -16,12 +16,12 @@ import MenuTitle from './MenuTitle.vue'
 import { useRouter } from 'vue-router'
 
 interface Props {
-  menuList: Router.Route[]
+  menuList: Router.IRoute[]
 }
 defineProps<Props>()
 
 const router = useRouter()
-const go = (menu: Router.Route) => {
+const go = (menu: Router.IRoute) => {
   router.push(menu.path)
 }
 </script>

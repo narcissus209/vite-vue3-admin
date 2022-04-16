@@ -72,19 +72,19 @@ export const useLayoutStore = defineStore('layout-store', {
   },
   actions: {
     // 添加tags list
-    addTagsList(route: Router.Route) {
+    addTagsList(path: string, title: string, hideTab = false) {
       this.tags.list.forEach(el => {
-        if (el.path === route.path) {
+        if (el.path === path) {
           el.isActive = true
         } else {
           el.isActive = false
         }
       })
-      if (!route.meta.hideTab) {
-        if (!this.tags.list.find(el => el.path === route.path)) {
+      if (!hideTab) {
+        if (!this.tags.list.find(el => el.path === path)) {
           this.tags.list.push({
-            title: route.meta.title,
-            path: route.path,
+            title: title,
+            path: path,
             isActive: true
           })
         }

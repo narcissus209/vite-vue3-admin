@@ -9,8 +9,8 @@
 import { useRoute } from 'vue-router'
 import { watch, reactive } from 'vue'
 
-const getBreadcrumbList = (route: Router.Route) => {
-  let breadcrumbList: Router.Route[] = []
+const getBreadcrumbList = (route: Router.IRoute) => {
+  let breadcrumbList: Router.IRoute[] = []
   const matchedArr = route.matched
   const len = matchedArr.length
   if (len > 1) {

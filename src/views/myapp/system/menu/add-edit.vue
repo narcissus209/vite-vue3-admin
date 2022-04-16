@@ -36,7 +36,7 @@
 </template>
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
-import { ref, onMounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { getMenuDateilApi, addMenuApi, editMenuApi, getMenuParentApi } from '@/apis/system/menu'
 import { typeMap, getPids } from './menuData'
@@ -44,12 +44,12 @@ import { cloneDeep } from '@/utils'
 
 const router = useRouter()
 const route = useRoute()
-const pageType = ref<string>(route.query.type as string)
-const id = ref<string>(route.query.id as string)
-const pid = ref<string>(route.query.pid as string)
+const pathQuery = reactive({
+  type: route.query.type as string,
+  id: route.query.id as string,
+  pid: route.query.pid as string
+})
 
-// 菜单信息
-const menuTree = ref<Router.Route[]>([])
 const cascaderProps = {
   checkStrictly: true,
   expandTrigger: 'hover',
@@ -58,32 +58,40 @@ const cascaderProps = {
 }
 
 // 表单信息
-const formData = ref<Router.Route>({
+const formData = ref<Menu.IForm>({
   title: '',
   name: '',
   type: 'view',
   icon: '',
   sort: 1,
+  hide: false,
   hideTab: false,
   pids: []
 })
 // 获取角色信息
 onMounted(async () => {
-  if (id.value && (pageType.value === 'edit' || pageType.value === 'detail')) {
-    const { data } = await getMenuDateilApi(id.value)
+  if (pathQuery.id && (pathQuery.type === 'edit' || pathQuery.type === 'detail')) {
+    const { data } = await getMenuDateilApi(pathQuery.id)
     if (data.id) {
       formData.value = cloneDeep(data)
-      formData.value.pids = data.pids || []
       formData.value.icon = data.icon || ''
+      formData.value.hide = data.hide || false
       formData.value.hideTab = data.hideTab || false
+      formData.value.pids = data.pids || []
     }
   }
+  setMenuTree()
+})
+
+// 菜单信息
+const menuTree = ref<Router.IRoute[]>([])
+const setMenuTree = async () => {
   const menuData = await getMenuParentApi()
   menuTree.value = menuData.data
-  if (pid.value) {
-    formData.value.pids = getPids(pid.value, menuData.data)
+  if (pathQuery.pid) {
+    formData.value.pids = getPids(pathQuery.pid, menuData.data)
   }
-})
+}
 
 // 表单规则配置
 const formRef = ref<any>()
@@ -99,7 +107,7 @@ const rules = {
 const saveData = async () => {
   try {
     await formRef.value.validate()
-    if (pageType.value === 'edit' && id.value) {
+    if (pathQuery.type === 'edit' && pathQuery.id) {
       await editMenuApi(formData.value)
       ElMessage.success('编辑成功')
     } else {

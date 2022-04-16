@@ -1,10 +1,11 @@
 import Layout from '@/layout/index.vue'
 
-const constantRoutes: Router.Route[] = [
+const constantRoutes: Router.IRoute[] = [
   {
     name: 'home',
     path: '/',
-    redirect: '/myapp'
+    redirect: '/myapp',
+    meta: { title: 'home' }
   },
   {
     name: 'login',
@@ -29,6 +30,7 @@ const constantRoutes: Router.Route[] = [
     path: '/error',
     component: Layout,
     redirect: '/404',
+    meta: { title: 'error' },
     children: [
       {
         name: '401',
@@ -53,7 +55,8 @@ const constantRoutes: Router.Route[] = [
   {
     path: '/:pathMatch(.*)*',
     name: 'end404',
-    redirect: '/404'
+    redirect: '/404',
+    meta: { title: 'end404' }
   }
 ]
 

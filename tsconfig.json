@@ -27,6 +27,7 @@
     "preserveValueImports": true,
     "importsNotUsedAsValues": "error",
     "forceConsistentCasingInFileNames": true,
+    "declaration": true,
     "skipLibCheck": true
   },
 	"exclude": [

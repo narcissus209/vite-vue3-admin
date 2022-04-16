@@ -13,15 +13,15 @@ export const typeMap: any = {
   }
 }
 
-export const getPids = (id: string, menu: Router.Route): string[] => {
-  const pids: string[] = []
+export const getPids = (id: string, menu: Menu.IMenu[]): Menu.Pids => {
+  const pids: Menu.Pids = []
   for (let i = 0; i < menu.length; i++) {
     if (menu[i].id === id) {
       pids.push(menu[i].id)
       return pids
     } else {
-      if (menu[i].children && menu[i].children.length) {
-        const res: string[] = getPids(id, menu[i].children)
+      if (menu[i]?.children?.length) {
+        const res: Menu.Pids = getPids(id, menu[i].children as Menu.IMenu[])
         if (res.length) {
           pids.push(menu[i].id, ...res)
         }

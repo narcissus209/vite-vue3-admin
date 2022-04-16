@@ -18,12 +18,6 @@ export const logoutApi = (): any => {
   }
 }
 
-export const getUserInfoApi = (): any => {
-  return http('/api/users', {
-    method: 'get'
-  })
-}
-
 export const getPermissionMenuApi = () => {
   return http('/mock/permission', {
     method: 'get'

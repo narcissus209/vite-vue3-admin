@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import constantRoutes from './constantRoutes'
 import { useUserStore, usePermissionStore, useLayoutStore } from '@/store'
 
@@ -6,7 +7,7 @@ const BaseUrl = String(import.meta.env.VITE_BASE_URL)
 
 const router = createRouter({
   history: createWebHistory(BaseUrl), // createWebHistory
-  routes: constantRoutes
+  routes: constantRoutes as RouteRecordRaw[]
 })
 const whiteRoutes = ['login', 'forget-password']
 router.beforeEach(async to => {
@@ -18,7 +19,7 @@ router.beforeEach(async to => {
   const { addTagsList } = useLayoutStore()
   if (isLogin) {
     if (hasMenu) {
-      addTagsList(to)
+      addTagsList(to.path, to.meta.title as string, to.meta.hideTab as boolean)
       return true
     } else {
       await generateRoutes()

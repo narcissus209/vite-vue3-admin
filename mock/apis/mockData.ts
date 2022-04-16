@@ -72,7 +72,7 @@ const staff = mock({
 export const staffList = staff.list
 
 // 菜单
-export const menuList: Router.Route[] = [
+export const menuList: Menu.IMenu[] = [
   {
     id: '10000',
     name: 'myapp_system',
