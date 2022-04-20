@@ -7,7 +7,8 @@ const BaseUrl = String(import.meta.env.VITE_BASE_URL)
 
 const router = createRouter({
   history: createWebHistory(BaseUrl), // createWebHistory
-  routes: constantRoutes as RouteRecordRaw[]
+  routes: constantRoutes as RouteRecordRaw[],
+  scrollBehavior: () => ({ top: 0, left: 0 })
 })
 const whiteRoutes = ['login', 'forget-password']
 router.beforeEach(async to => {
