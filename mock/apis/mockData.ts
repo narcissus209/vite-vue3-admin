@@ -87,7 +87,7 @@ export const menuList: Menu.IMenu[] = [
     name: 'myapp_system_account',
     title: '账号管理',
     type: 'menuView',
-    icon: 'system',
+    icon: 'account',
     sort: 1
   },
   {
@@ -113,7 +113,7 @@ export const menuList: Menu.IMenu[] = [
     name: 'myapp_system_menu',
     title: '菜单管理',
     type: 'menuView',
-    icon: 'system',
+    icon: 'menu',
     sort: 2
   },
   {
@@ -139,7 +139,7 @@ export const menuList: Menu.IMenu[] = [
     name: 'myapp_system_role',
     title: '角色管理',
     type: 'menuView',
-    icon: 'system',
+    icon: 'role',
     sort: 3
   },
   {
@@ -165,7 +165,7 @@ export const menuList: Menu.IMenu[] = [
     name: 'myapp_system_staff',
     title: '员工管理',
     type: 'menuView',
-    icon: 'system',
+    icon: 'staff',
     sort: 5
   },
   {
