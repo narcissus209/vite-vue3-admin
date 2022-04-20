@@ -81,6 +81,7 @@ export default function listModel({ defaultQuery, setParams, queryListApi, delIt
       const r: INewRoute = {
         path: routeParams.path,
         query: {
+          type,
           ...query
         }
       }

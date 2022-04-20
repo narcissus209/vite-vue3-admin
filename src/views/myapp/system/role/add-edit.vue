@@ -19,7 +19,7 @@
 </template>
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
-import { ref, onMounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { getRoleDateilApi, addRoleApi, editRoleApi } from '@/apis/system/role'
 import { cloneDeep } from '@/utils'
@@ -27,8 +27,10 @@ import type { IRole } from '@/typings/api'
 
 const router = useRouter()
 const route = useRoute()
-const pageType = ref<string>(route.query.type as string)
-const id = ref<string>(route.query.id as string)
+const pathQuery = reactive({
+  type: route.query.type as string,
+  id: route.query.id as string
+})
 
 // 表单信息
 const formData = ref<IRole>({
@@ -37,8 +39,8 @@ const formData = ref<IRole>({
 })
 // 获取角色信息
 onMounted(async () => {
-  if (id.value && (pageType.value === 'edit' || pageType.value === 'detail')) {
-    const { data } = await getRoleDateilApi(id.value)
+  if (pathQuery.id && (pathQuery.type === 'edit' || pathQuery.type === 'detail')) {
+    const { data } = await getRoleDateilApi(pathQuery.id)
     if (data.id) {
       formData.value = cloneDeep(data)
     }
@@ -56,7 +58,7 @@ const rules = {
 const saveData = async () => {
   try {
     await formRef.value.validate()
-    if (pageType.value === 'edit' && id.value) {
+    if (pathQuery.type === 'edit' && pathQuery.id) {
       await editRoleApi(formData.value)
       ElMessage.success('编辑成功')
     } else {
