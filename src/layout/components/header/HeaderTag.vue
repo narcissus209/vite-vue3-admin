@@ -17,8 +17,13 @@ const { tags, closeTag } = useLayoutStore()
 const router = useRouter()
 const closeFn = (i: number) => {
   if (tags.list.length === 1) return
-  closeTag(i)
-  router.back()
+  // 如果是未激活tab，可直接关闭
+  if (tags.list[i].isActive) {
+    closeTag(i)
+    router.replace(tags.list[tags.list.length - 1].path)
+  } else {
+    closeTag(i)
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -32,22 +37,22 @@ const closeFn = (i: number) => {
     border: 1px solid #d9d9d9;
     background: #fff;
     color: #333;
-    padding-left: 8px;
     border-radius: 3px;
-    transition: background 0.3s, color 0.3s;
+    transition: all 1s;
     margin-left: 12px;
+    min-width: 86px;
     .tag-name {
       line-height: 30px;
     }
     .tag-close {
-      padding: 4px 8px;
+      padding: 8px;
       line-height: 12px;
-      visibility: hidden;
+      display: none;
     }
     &:hover {
       color: #409eff;
       .tag-close {
-        visibility: visible;
+        display: inline-block;
       }
     }
     &.activite {
