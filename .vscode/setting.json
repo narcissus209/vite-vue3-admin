@@ -1,7 +1,7 @@
 {
   "editor.tabSize": 2,
   "editor.fontSize": 16,
-  "files.eol": "\n",
+  "files.eol": "\r\n",
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": true
 	},
@@ -13,10 +13,10 @@
 	},
   "emmet.includeLanguages": {},
 	"[jsonc]": {
-		"editor.defaultFormatter": "vscode.json-language-features"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[json]": {
-		"editor.defaultFormatter": "vscode.json-language-features"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[javascript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"

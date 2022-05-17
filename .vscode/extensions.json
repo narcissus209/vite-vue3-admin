@@ -4,6 +4,7 @@
     "xabikos.javascriptsnippets",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "johnsoncodehk.volar"
+    "vue.volar",
+    "vue.vscode-typescript-vue-plugin"
   ]
 }
